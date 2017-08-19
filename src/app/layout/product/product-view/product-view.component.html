@@ -1,0 +1,324 @@
+<div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+         {{product.category}}
+      </li>
+      <li class="breadcrumb-item">
+         {{product.subcategory}}
+      </li>
+      <li class="breadcrumb-item">
+         <i class="fa fa-tag">&nbsp;</i><strong>{{product.name}}</strong>
+      </li>
+    </ol>    
+  </div>  
+</div>
+
+<div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+  <div class="col-md-2 card">
+    <!-- <img style="margin-top:6px;" src="http://placehold.it/200x200" /> -->
+    <img class="img-fluid" alt="Responsive image" [(src)]="primaryImage.path+primaryImage.lg" style="margin-top:6px;"/>
+    <div class="row">
+      <p class="col-md-12" *ngIf="product.isfeatured"><i class="fa fa-bookmark" >&nbsp;</i> Featured</p>
+      <p class="col-md-12" *ngIf="product.isnew"><i class="fa fa-certificate">&nbsp;</i> New</p>
+    </div>
+    <div class="row">
+      <p class="col-md-12" *ngIf="product.gender=='m'">
+          <i class="fa fa-male">&nbsp;</i>Male
+      </p>
+      <p class="col-md-12" *ngIf="product.gender=='f'">
+          <i class="fa fa-female">&nbsp;</i>Female
+      </p>
+      <p class="col-md-12" *ngIf="product.gender=='u'">
+          <i class="fa fa-users">&nbsp;</i>Unisex
+      </p>
+      <p class="col-md-12" *ngIf="product.agegroup=='n'">
+          <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Newborn
+      </p>
+      <p class="col-md-12" *ngIf="product.agegroup=='i'">
+          <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Infant
+      </p>
+      <p class="col-md-12" *ngIf="product.agegroup=='k'">
+          <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Kids
+      </p>
+      <p class="col-md-12" *ngIf="product.agegroup=='t'">
+          <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Teen
+      </p>
+      <p class="col-md-12" *ngIf="product.agegroup=='a'">
+          <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Adult
+      </p>
+      <p class="col-md-12" *ngIf="product.agegroup=='s'">
+          <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Seniors
+      </p>
+      <p class="col-md-12">
+          <i class="fa fa-tag">&nbsp;</i>&nbsp;{{product.manufacturename}}
+      </p>
+      <p class="col-md-12">
+          <i class="fa fa-building">&nbsp;</i>&nbsp;{{product.manufacturename}}
+      </p>
+      <p class="col-md-12">
+          <i class="fa fa-barcode">&nbsp;</i>&nbsp;{{product.modelno}}
+      </p>
+    </div>
+  </div>
+  <div class="col-sd-1">&nbsp;</div>
+  <div class="col-md-9">
+    <div class="row">
+      <h1 class="col-sm-10">{{product.name}} <a href class="btn btn-primary btn-sm" [routerLink]="productEditLink"> Edit </a> <a href class="btn btn-info btn-sm" [routerLink]="productEditLink"> Copy </a> <a href class="btn btn-warning btn-sm" [routerLink]="productEditLink"> Delete </a></h1>
+    </div>
+    <div class="row" style="padding-left:5px">
+      <p><i class="fa fa-building">&nbsp;</i>&nbsp;{{product.manufacturename}} | <i class="fa fa-barcode">&nbsp;</i>&nbsp;{{product.modelno}} </p>
+    </div>
+    <div class="row">
+      <div class="col-sm-10">
+        <span class="badge badge-default" *ngFor="let i of [1,2,3,4,5]" style="margin-right:5px">tag{{i}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <p>{{product.shortdesc}}</p>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">{{product.longdesc}}</div>
+    </div>
+  </div>  
+</div>
+<!-- <br /> -->
+<!-- <div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+    <div class="hidden-xs hidden-sm col-md-12 card" style="margin:0px;padding:0px;">
+        <div class="card-header"><strong><i class="fa fa-picture-o">&nbsp;</i>&nbsp;Images</strong>&nbsp;<span class="text-primary" (click)="toggleImageForm()"><i class="fa fa-plus-circle">&nbsp;</i>Add</span></div>
+        <div class="card-body" *ngIf="showAddImages">
+               <input type="file" class="form-control" ng2FileSelect  multiple [uploader]="fileuploader" accept="image/x-png,image/gif,image/jpeg"/>
+        </div>
+        <div class="col-md-9" style="margin-bottom: 40px" *ngIf="fileuploader?.queue?.length>0"> -->
+            <!-- <p *ngIf="fileuploader?.queue?.length>0"> No. Of Files: {{ fileuploader?.queue?.length }}</p>
+            <button class="btn btn-small btn-primary" (click)="fileuploader.uploadAll()" *ngIf="fileuploader?.queue?.length>0">Upload All</button> -->
+            <!-- <table class="table">
+                <thead>
+                <tr>
+                    <th style="width:10px;">Status</th>
+                    <th width="50%">Name</th>
+                    <th><button class="btn btn-sm btn-primary" (click)="fileuploader.uploadAll()" *ngIf="fileuploader.getNotUploadedItems().length">Upload All</button> </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of fileuploader.queue">
+                    <td class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+                        <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                        <span *ngIf="item.isError"><i class="fa fa-exclamation-circle"></i></span>
+                    </td>
+                    <td><strong>{{ item?.file?.name }}</strong></td> -->
+                    <!-- <td>
+                        <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="height: 10px;" [style.width]="item.progress+'%'" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </td> -->
+                    <!-- <td nowrap *ngIf="!(item.isReady || item.isUploading || item.isSuccess)">
+                        <button type="button" class="btn btn-success btn-sm"
+                                (click)="item.upload()">
+                            <span class="glyphicon glyphicon-upload"></span> Upload
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm"
+                                (click)="item.cancel()">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm"
+                                (click)="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </td>
+                    <td nowrap *ngIf="item.isSuccess">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="height: 10px;" [style.width]="item.progress +'%'" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>   
+        </div> 
+        <div class="col-md-9" *ngIf="!showAddImages">
+            <img class="img-fluid" alt="Responsive image" *ngFor="let productImage of product.ProductImages" [(src)]="productImage.path+productImage.md" />
+        </div>    
+    </div>
+</div> -->
+
+<br>
+<div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+  <div class="hidden-xs hidden-sm col-md-12 card" style="margin:0px;padding:0px;">
+      <div class="card-header"><strong><i class="fa fa-shopping-cart">&nbsp;</i>&nbsp;Inventory</strong>&nbsp;<span class="text-primary" (click)="toggleInventoryForm()"><i class="fa fa-plus-circle">&nbsp;</i>Add</span></div>
+      <div class="row" *ngIf="showAddInventory">
+        <div class="col-md-9"> <br />
+            <!-- <br />
+            <div class="form-inline form-group">
+                <label class="col-sm-2 control-label text-right">Color</label>
+                <input 
+                    type="text" class="form-control col-sm-1" placeholder="" 
+                    [(ngModel)]="newinventory.color" 
+                    [(colorPicker)]="newinventory.color" 
+                    [cpPosition]="'bottom'"
+                    [style.backgroundColor]="newinventory.color"
+                    [style.color]="newinventory.color"
+                    [cpPositionOffset]="'50%'"
+                    [cpPositionRelativeToArrow]="true"
+                    [cpOKButton]="true"
+                    [cpOKButtonClass]="'btn btn-sm btn-success'"
+                    [cpCancelButton]="true"
+                    [cpCancelButtonClass]="'btn btn-sm btn-warning'"
+                    [cpFallbackColor]="'#000'"
+                    (colorPickerChange)="newinventory.color=$event"
+                    style="padding:5px;border:1px soild #ddd"
+                />
+            </div> -->
+            <div class="form-inline form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">SKU or Barcode</label>
+                <input type="text" class="form-control col-sm-7" placeholder="SKU or Barcode" [(ngModel)]="newinventory.sku" />
+            </div>
+            <!-- <div class="form-inline form-group">
+                <label class="col-sm-2 control-label text-right">Size</label>
+                <input auto-complete type="text" class="form-control col-sm-12" placeholder="Size" [(ngModel)]="newinventory.size" [source]= "sizes" no-match-found-text="New Size">
+            </div>
+            <div class="form-inline form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">Instock Quantity</label>
+                <input type="text" class="form-control col-sm-7" placeholder="Instock" [(ngModel)]="newinventory.instock" />
+            </div>
+            <div class="form-inline form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">Reserved Quantity</label>
+                <input type="text" class="form-control col-sm-7" placeholder="Reserved" [(ngModel)]="newinventory.reserved" />
+            </div>
+            <div class="form-inline form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">Unit Price</label>
+                <input type="text" class="form-control col-sm-7" placeholder="Unit Price" [(ngModel)]="newinventory.unitprice" />
+            </div>
+            <div class="form-inline form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">Discount</label>
+                <input type="text" class="form-control col-sm-7" placeholder="Discount" [(ngModel)]="newinventory.discount" />
+            </div> -->
+            <!-- <div class="form-inline form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">&nbsp;</label>
+                <button type="button" class="btn btn-primary" (click)="addInventory()" *ngIf="newinventory.productid==0">Save</button>
+                <button type="button" class="btn btn-primary" (click)="updateInventory()" *ngIf="newinventory.productid!=0">Update</button>
+            </div> -->
+        </div>
+        <div class="col-md-offset-2 col-md-9 col-md-9">
+            <div class="form-inline form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label text-right">Label</label>
+                    <label class="form-control" (click)="newinventory.isfeatured=!newinventory.isfeatured">
+                        <i class="fa fa-check text-success" *ngIf="newinventory.isfeatured">&nbsp;</i> Featured
+                    </label>&nbsp;&nbsp;
+                    <label (click)="newinventory.isnew=!newinventory.isnew" class="form-control">
+                        <i class="fa fa-check text-success" *ngIf="newinventory.isnew">&nbsp;</i> New
+                    </label>&nbsp;&nbsp;
+                    <label class="form-control" (click)="newinventory.isbestseller=!newinventory.isbestseller">
+                        <i class="fa fa-check text-success" *ngIf="newinventory.isbestseller">&nbsp;</i> Best Seller
+                    </label>&nbsp;&nbsp;
+                    
+            </div>                
+        </div>
+        <div class="col-md-offset-2 col-md-9 col-md-9">
+            <div class="form-inline form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label text-right">&nbsp;</label>
+                    <label (click)="newinventory.isdeal=!newinventory.isdeal" class="form-control">
+                        <i class="fa fa-check text-success" *ngIf="newinventory.isdeal">&nbsp;</i> Deal
+                    </label>&nbsp;&nbsp;
+                    <label (click)="newinventory.issale=!newinventory.issale" class="form-control">
+                        <i class="fa fa-check text-success" *ngIf="newinventory.issale">&nbsp;</i> Sale
+                    </label>
+            </div>                
+        </div>
+
+        <div class="col-md-offset-2 col-md-9 col-md-9">
+            <div class="form-inline form-group"> 
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">&nbsp;</label>
+                <input auto-complete type="text" class="form-control col-sm-12" placeholder="Size" [(ngModel)]="newinventory.size" [source]= "sizes" no-match-found-text="New Size">
+            </div>
+        </div>
+        <div class="col-md-offset-2 col-md-9 col-md-9">
+                <div class="form-inline form-group"> 
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">Instock</label>
+                <input type="text" class="form-control col-sm-2" placeholder="Instock" [(ngModel)]="newinventory.instock" />
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">Reserved</label>
+                <input type="text" class="form-control col-sm-2" placeholder="Reserved" [(ngModel)]="newinventory.reserved" />
+            </div>
+        </div>
+        <div class="col-md-offset-2 col-md-9 col-md-9">
+                <div class="form-inline form-group"> 
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">Unit Price</label>
+                <input type="text" class="form-control col-sm-2" placeholder="Unit Price" [(ngModel)]="newinventory.unitprice" />
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">Discount</label>
+                <input type="text" class="form-control col-sm-2" placeholder="Discount" [(ngModel)]="newinventory.discount" />
+            </div>            
+      </div> 
+      <div class="col-md-offset-2 col-md-9 col-md-9">
+            <div class="form-inline form-group">
+                <label class="col-sm-2 control-label text-right">Images</label>
+                <input type="file" class="form-control" ng2FileSelect  multiple [uploader]="invfileuploader" accept="image/x-png,image/gif,image/jpeg"/>
+            </div>
+            <div class="col-md-12" *ngIf="invfileuploader?.queue?.length>0">
+                <ul *ngFor="let item of invfileuploader.queue">
+                    <li>
+                        <span *ngIf="item.isUploading"><i class="glyphicon glyphicon-upload"></i></span>
+                        <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+                        <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                        <span *ngIf="item.isError"><i class="fa fa-exclamation-circle"></i></span>
+                     {{ item?.file?.name }}
+                    </li>
+                    
+                </ul>    
+            </div>
+        </div>      
+      <div class="col-md-offset-2 col-md-9">
+            <div class="form-inline form-group" *ngIf="!invfileuploader.isUploading">
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">&nbsp;</label>
+                <button type="button" class="btn btn-primary" (click)="addInventory()" *ngIf="newinventory.productid==0">Save</button>
+                <button type="button" class="btn btn-primary" (click)="updateInventory()" *ngIf="newinventory.productid!=0">Update</button>
+            </div>
+        
+      </div>       
+      </div>
+      <table class="card-block table table-sm table-hover">
+          <thead>
+          <tr>
+              <th style="width:1rem">Color</th>
+              <th>SKU</th>
+              <th>Size</th>
+              <th>Unit Price</th>
+              <th>Discount Price</th>
+              <th>List Price</th>
+              <th>Instock</th>
+              <th>Reserved</th>
+              <th>Orders</th>
+              <th>Availiable</th>
+              <th>&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let inventory of product.Inventories; let i = index;">
+              <th scope="row">
+                <!-- <p  [style.backgroundColor]="inventory.color"
+                    [style.color]="inventory.color"
+                    style="padding:5px;border:1px soild #ddd"
+                >
+                    <i class="fa fa-square">&nbsp;</i>
+              </p> -->
+                <img *ngIf="inventory.ProductImages.length>0" [(src)]="inventory.ProductImages[0].path+inventory.ProductImages[0].sm" />
+              </th>
+              <td>{{inventory.sku}}</td>
+              <td>{{inventory.size}}</td>
+              <td>{{inventory.unitprice}}</td>
+              <td>{{inventory.discount}}%</td>
+              <td>{{inventory.unitprice-(inventory.unitprice*(inventory.discount/100))}}</td>
+              <td>{{inventory.instock}}</td>
+              <td>{{inventory.reserved}}</td>
+              <td>{{inventory.ordered}}</td>
+              <td>{{inventory.instock-(inventory.reserved+inventory.ordered)}}</td>
+              <td>
+                <span class="btn btn-sm" title="Copy" (click)="copyInventory(i)"><i class="fa fa-copy">&nbsp;</i></span>&nbsp;
+                <span class="btn btn-sm text-success" title="Edit" (click)="editInventory(i)"><i class="fa fa-pencil">&nbsp;</i></span>&nbsp;
+                <span class="btn btn-sm text-warning" title="Delete"><i class="fa fa-trash">&nbsp;</i></span>&nbsp;
+                <span class="btn btn-sm text-danger" title="Stop"><i class="fa fa-ban">&nbsp;</i></span>
+            </td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+    <a href [routerLink]="newproducturl" class="btn btn-md btn-success"> New Product </a>
+</div>  
+<div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+<!-- <div class="card col-md-2" >
+    <img class="card-img-top" src="http://placehold.it/200x200" alt="Card image cap">
+    <div class="card-body" style="padding:5px;">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{product.shortdesc}}</p>
+    </div>
+  </div> -->
+  <div class="col-md-2 card" style="padding:0px;margin:5px;" *ngFor="let product of products">
+      <a href [routerLink] = "product.url" style="min-height:250px;vertical-align:middle">
+          <img class="card-img-top img-fluid" [src]="product.ProductImages[0].path+product.ProductImages[0].lg" alt="Card image cap">
+      </a>
+      <div class="card-body" style="padding:5px;">
+        <h5 class="card-title">{{product.name}}</h5>
+        <p *ngIf="product.isfeatured"><i class="fa fa-bookmark" >&nbsp;</i> Featured</p>
+        <p *ngIf="product.isnew"><i class="fa fa-certificate">&nbsp;</i> New</p>
+        <p *ngIf="product.gender=='m'">
+            <i class="fa fa-male">&nbsp;</i>Male
+        </p>
+        <p *ngIf="product.gender=='f'">
+            <i class="fa fa-female">&nbsp;</i>Female
+        </p>
+        <p *ngIf="product.gender=='u'">
+            <i class="fa fa-users">&nbsp;</i>Unisex
+        </p>
+        <p *ngIf="product.agegroup=='n'">
+            <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Newborn
+        </p>
+        <p *ngIf="product.agegroup=='i'">
+            <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Infant
+        </p>
+        <p *ngIf="product.agegroup=='k'">
+            <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Kids
+        </p>
+        <p *ngIf="product.agegroup=='t'">
+            <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Teen
+        </p>
+        <p *ngIf="product.agegroup=='a'">
+            <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Adult
+        </p>
+        <p *ngIf="product.agegroup=='s'">
+            <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Seniors
+        </p>
+        <p>
+            <i class="fa fa-tag">&nbsp;</i>&nbsp;{{product.materialtype}}
+            <i class="fa fa-building">&nbsp;</i>&nbsp;{{product.manufacturename}}
+            <i class="fa fa-barcode">&nbsp;</i>&nbsp;{{product.modelno}}
+        </p>
+      </div>
+    </div>  
+</div>

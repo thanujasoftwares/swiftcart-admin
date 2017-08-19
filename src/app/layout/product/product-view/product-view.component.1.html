@@ -1,0 +1,115 @@
+<div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+      <div class="col-md-8">
+        <h4><i class="fa fa-tag">&nbsp;</i>{{product.name}}</h4>
+      </div>
+</div>
+
+<form class="form-horizontal col-md-offset-2 col-md-10" (click)="false" ngNoForm>
+
+  <!-- <div class="form-inline form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label text-right">SKU</label>
+    <input type="text" class="form-control col-sm-7" id="inputProductName" placeholder="Name" [(ngModel)]="product.name" name="name"> &nbsp;
+  </div> -->
+  <!-- <div class="form-inline form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label text-right">Title</label>
+    <input type="text" class="form-control col-sm-7" id="inputProductName" placeholder="Name" [(ngModel)]="product.name" name="name"> &nbsp;
+  </div> -->
+  <div class="form-inline form-group">
+      <label for="inputEmail3" class="col-sm-2 control-label text-right">Label</label>
+      <label class="form-control">
+          <i class="fa fa-check text-success" *ngIf="product.isfeatured">&nbsp;</i> Featured
+      </label>&nbsp;&nbsp;
+      <label class="form-control">
+          <i class="fa fa-check text-success" *ngIf="product.isnew">&nbsp;</i> New
+      </label>
+  </div>
+    
+  <div class="form-inline form-group">
+      <label class="col-sm-2 control-label">Gender</label> &nbsp;
+      <label class="form-control" *ngIf="product.gender=='m'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;<i class="fa fa-male">&nbsp;</i>Male
+      </label>&nbsp;&nbsp;
+      <label class="form-control" *ngIf="product.gender=='f'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;<i class="fa fa-female">&nbsp;</i>Female
+      </label>&nbsp;&nbsp;
+      <label class="form-control" *ngIf="product.gender=='u'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;<i class="fa fa-users">&nbsp;</i>Unisex
+      </label>
+      <label class="col-sm-2 control-label">Age</label> &nbsp;
+      <label class="form-control" *ngIf="product.agegroup=='n'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;Newborn
+      </label>&nbsp;&nbsp;
+      <label class="form-control" *ngIf="product.agegroup=='i'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;Infant
+      </label>&nbsp;&nbsp;
+      <label class="form-control" *ngIf="product.agegroup=='k'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;Kids
+      </label>&nbsp;&nbsp;
+      <label class="form-control" *ngIf="product.agegroup=='t'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;Teen
+      </label>&nbsp;&nbsp;
+      <label class="form-control" *ngIf="product.agegroup=='a'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;Adult
+      </label>&nbsp;&nbsp;
+      <label class="form-control" *ngIf="product.agegroup=='s'">
+          <i class="fa fa-check text-success">&nbsp;</i>&nbsp;Seniors
+      </label>&nbsp;&nbsp;
+  </div>
+
+  <div class="form-inline form-group">
+      <label class="col-sm-2 control-label">Category</label>
+      <label class="form-control">{{product.category}}</label>
+      <label class="col-sm-2 control-label">Subcategory</label> &nbsp;
+      <label class="form-control">{{product.subcategory}}</label>
+  </div>
+  <div class="form-inline form-group">
+      <label class="col-sm-2 control-label">Fabric</label> &nbsp;
+      <label class="form-control">{{product.materialtype}}</label>
+  </div>
+  
+  <div class="form-inline form-group">
+    <label class="col-sm-2 control-label text-right">Manufacture</label>
+    <label class="form-control">{{product.manufacturename}}</label>
+    <label class="col-sm-2 control-label text-right">Model</label>
+    <label class="form-control">{{product.modelno}}</label>
+  </div>
+
+  <div class="form-inline form-group">
+    <label class="col-sm-2 control-label">Short Description<sup>*</sup></label>
+    <label class="form-control col-sm-10">{{product.shortdesc}}</label>
+  </div>
+
+  <div class="form-inline form-group">
+    <label class="col-sm-2 control-label">Product Description<sup>*</sup></label>
+    <label class="form-control col-sm-10">{{product.longdesc}}</label>
+  </div>
+
+  <div class="form-inline form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Tags<sup>*</sup></label>
+    <textarea class="form-control col-sm-10" id="inputTags" rows="3" placeholder="Optional helps in product search" [(ngModel)]="product.longdesc"></textarea>
+  </div> 
+
+  <div class="form-inline form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">Color<sup>*</sup></label>
+    <div class="col-sm-10">
+      <button class="btn btn-info"> Clear color selections </button>
+    </div>
+  </div>
+  <div class="form-inline form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">&nbsp;</label>
+    <div class="col-sm-10">
+    <div *ngFor="let colors of colorpalatte;">
+      <div class="col-xs-1">
+        <span class="btn" *ngFor="let color of colors" style="margin:0px -2px 0px 0px;border-radius:0px" [style.backgroundColor]="color" ><input type="checkbox" name="colors" /></span>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <p class="text-muted"> * Fields are optional </p>
+      <button type="button" class="btn btn-primary" (click)="add()">Review</button>
+    </div>
+  </div>
+</form>
+<!---  Color palate -->
