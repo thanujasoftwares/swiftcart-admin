@@ -118,12 +118,12 @@ export class ProductViewComponent implements OnInit {
   }
   toggleInventoryForm(){
     this.showAddInventory=!this.showAddInventory;
-    this.invfileuploader = new FileUploader({url: environment.api.products.url+'/'+this.product.id+'/dummy'});
+    // this.invfileuploader = new FileUploader({url: environment.api.products.url+'/'+this.product.id+'/dummy'});
     this.newinventory= new Inventory();
   }
   editInventory(i){
     this.newinventory=JSON.parse(JSON.stringify(this.product.Inventories[i]));
-    this.invfileuploader = new FileUploader({url: environment.api.products.url+'/'+this.product.id+'/inventory/'+this.newinventory.id+'/images'});    
+    // this.invfileuploader = new FileUploader({url: environment.api.products.url+'/'+this.product.id+'/inventory/'+this.newinventory.id+'/images'});    
     this.showAddInventory = true;
   }
   copyInventory(i){
@@ -137,15 +137,16 @@ export class ProductViewComponent implements OnInit {
       if(inventory){
         inventory.productid=this.product.id;
         this.product.Inventories.push(inventory);
-        if(this.invfileuploader.queue.length>0){
-          this.invfileuploader.setOptions({url: environment.api.products.url+'/'+this.product.id+'/inventory/'+inventory.id+'/images'});
-          this.invfileuploader.uploadAll();
-          this.invfileuploader.onCompleteAll = () =>{
-            this.editInventory(this.product.Inventories.length-1);
-          }
-        }else{
-          this.editInventory(this.product.Inventories.length-1);
-        }
+        // if(this.invfileuploader.queue.length>0){
+        //   this.invfileuploader.setOptions({url: environment.api.products.url+'/'+this.product.id+'/inventory/'+inventory.id+'/images'});
+        //   this.invfileuploader.uploadAll();
+        //   this.invfileuploader.onCompleteAll = () =>{
+        //     this.editInventory(this.product.Inventories.length-1);
+        //   }
+        // }else{
+        //   this.editInventory(this.product.Inventories.length-1);
+        // }
+        this.editInventory(this.product.Inventories.length-1);
         
       }
     },(err)=>{
@@ -153,36 +154,36 @@ export class ProductViewComponent implements OnInit {
     })
   }
   updateInventory(){
-    if(this.invfileuploader.queue.length>0){
-      this.invfileuploader.setOptions({url: environment.api.products.url+'/'+this.product.id+'/inventory/'+this.newinventory.id+'/images'});
-      this.invfileuploader.uploadAll();
-      this.invfileuploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-        var jsonobj=JSON.parse(response);
-        var image = new ProductImage();
-        image.path=jsonobj.images[0].path;
-        image.actual=jsonobj.images[0].actual;
-        image.xl=jsonobj.images[0].xl;
-        image.lg=jsonobj.images[0].lg;
-        image.md=jsonobj.images[0].md;
-        image.sm=jsonobj.images[0].sm;
-        image.xs=jsonobj.images[0].xs;
-        this.newinventory.ProductImages.push(image);
+    // if(this.invfileuploader.queue.length>0){
+    //   this.invfileuploader.setOptions({url: environment.api.products.url+'/'+this.product.id+'/inventory/'+this.newinventory.id+'/images'});
+    //   this.invfileuploader.uploadAll();
+    //   this.invfileuploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+    //     var jsonobj=JSON.parse(response);
+    //     var image = new ProductImage();
+    //     image.path=jsonobj.images[0].path;
+    //     image.actual=jsonobj.images[0].actual;
+    //     image.xl=jsonobj.images[0].xl;
+    //     image.lg=jsonobj.images[0].lg;
+    //     image.md=jsonobj.images[0].md;
+    //     image.sm=jsonobj.images[0].sm;
+    //     image.xs=jsonobj.images[0].xs;
+    //     this.newinventory.ProductImages.push(image);
   
-        if(!this.hasPrimaryImage && this.newinventory.ProductImages.length==1){
-          this.primaryImage=this.newinventory.ProductImages[0];
-        }
+    //     if(!this.hasPrimaryImage && this.newinventory.ProductImages.length==1){
+    //       this.primaryImage=this.newinventory.ProductImages[0];
+    //     }
 
 
-        this.product.Inventories.map((inv,index)=>{
-          console.log(inv);
-          if(inv.id==this.newinventory.id){
-            this.product.Inventories[index]['ProductImages']=this.newinventory.ProductImages;
-          }
-        });
+    //     this.product.Inventories.map((inv,index)=>{
+    //       console.log(inv);
+    //       if(inv.id==this.newinventory.id){
+    //         this.product.Inventories[index]['ProductImages']=this.newinventory.ProductImages;
+    //       }
+    //     });
         
 
-      };
-    }
+    //   };
+    // }
     this.inventoryService.update(this.newinventory).subscribe((response)=>{
       if(response){
         this.product.Inventories.map((inv,index)=>{
@@ -203,7 +204,7 @@ export class ProductViewComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.productService
-        .get({id:params['id'],'include':['inventory','ratings']})
+        .get({id:params['id'],'include':['inventory','ratings','productimages']})
         .subscribe((products) => {
           this.product = products[0];
           this.product.agegroup=this.product.agegroup.trim();
@@ -211,14 +212,18 @@ export class ProductViewComponent implements OnInit {
           this.productEditLink='/products/'+this.product.id+'/edit';
           this.fileuploader = new FileUploader({url: environment.api.products.url+'/'+this.product.id+'/images'});
           let sizes=[];
+          if(!this.hasPrimaryImage && this.product.ProductImages.length>0){
+            this.primaryImage = this.product.ProductImages[0];
+            this.hasPrimaryImage=true;
+          }
           this.product.Inventories.map((inv,index)=>{
             sizes.push(inv.size);
             console.log(inv);
             
-            if(!this.hasPrimaryImage && inv.ProductImages.length>0){
-              this.primaryImage = inv.ProductImages[0];
-              this.hasPrimaryImage=true;
-            }
+            // if(!this.hasPrimaryImage && inv.ProductImages.length>0){
+            //   this.primaryImage = inv.ProductImages[0];
+            //   this.hasPrimaryImage=true;
+            // }
           });
           this.sizes = _.uniq(sizes);
         });

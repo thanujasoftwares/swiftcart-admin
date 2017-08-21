@@ -50,21 +50,22 @@
       <p class="col-md-12" *ngIf="product.agegroup=='s'">
           <i class="fa fa-user-circle">&nbsp;</i>&nbsp;Seniors
       </p>
-      <p class="col-md-12">
+      <!-- <p class="col-md-12">
           <i class="fa fa-tag">&nbsp;</i>&nbsp;{{product.manufacturename}}
       </p>
       <p class="col-md-12">
           <i class="fa fa-building">&nbsp;</i>&nbsp;{{product.manufacturename}}
-      </p>
+      </p> -->
       <p class="col-md-12">
-          <i class="fa fa-barcode">&nbsp;</i>&nbsp;{{product.modelno}}
+          <i class="fa fa-barcode">&nbsp;</i>&nbsp;{{product.sku}}
       </p>
     </div>
   </div>
   <div class="col-sd-1">&nbsp;</div>
   <div class="col-md-9">
     <div class="row">
-      <h1 class="col-sm-10">{{product.name}} <a href class="btn btn-primary btn-sm" [routerLink]="productEditLink"> Edit </a> <a href class="btn btn-info btn-sm" [routerLink]="productEditLink"> Copy </a> <a href class="btn btn-warning btn-sm" [routerLink]="productEditLink"> Delete </a></h1>
+      <h1 class="col-sm-10">{{product.name}} <a href class="btn btn-primary btn-sm" [routerLink]="productEditLink"> Edit </a> </h1>
+      <!-- <a href class="btn btn-info btn-sm" [routerLink]="productEditLink"> Copy </a> <a href class="btn btn-warning btn-sm" [routerLink]="productEditLink"> Delete </a> -->
     </div>
     <div class="row" style="padding-left:5px">
       <p><i class="fa fa-building">&nbsp;</i>&nbsp;{{product.manufacturename}} | <i class="fa fa-barcode">&nbsp;</i>&nbsp;{{product.modelno}} </p>
@@ -82,15 +83,30 @@
     </div>
   </div>  
 </div>
-<!-- <br /> -->
-<!-- <div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+<br />
+<div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
     <div class="hidden-xs hidden-sm col-md-12 card" style="margin:0px;padding:0px;">
         <div class="card-header"><strong><i class="fa fa-picture-o">&nbsp;</i>&nbsp;Images</strong>&nbsp;<span class="text-primary" (click)="toggleImageForm()"><i class="fa fa-plus-circle">&nbsp;</i>Add</span></div>
         <div class="card-body" *ngIf="showAddImages">
-               <input type="file" class="form-control" ng2FileSelect  multiple [uploader]="fileuploader" accept="image/x-png,image/gif,image/jpeg"/>
+            <div class="form-inline form-group" style="padding:5px;"> 
+               <input type="file" class="" ng2FileSelect  multiple [uploader]="fileuploader" accept="image/x-png,image/gif,image/jpeg"/>
+               <button class="btn btn-sm btn-primary" (click)="fileuploader.uploadAll()" *ngIf="fileuploader.getNotUploadedItems().length">Upload All</button>
+            </div>    
         </div>
-        <div class="col-md-9" style="margin-bottom: 40px" *ngIf="fileuploader?.queue?.length>0"> -->
-            <!-- <p *ngIf="fileuploader?.queue?.length>0"> No. Of Files: {{ fileuploader?.queue?.length }}</p>
+        <div class="col-md-12" *ngIf="fileuploader?.queue?.length>0">
+            <ul *ngFor="let item of fileuploader.queue" style="list-style:none">
+                <li>
+                    <span *ngIf="item.isUploading"><i class="glyphicon glyphicon-upload"></i></span>
+                    <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+                    <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                    <span *ngIf="item.isError"><i class="fa fa-exclamation-circle"></i></span>
+                    {{ item?.file?.name }}
+                </li>
+            </ul>    
+        </div>
+        
+        <!--<div class="col-md-9" style="margin-bottom: 40px" *ngIf="fileuploader?.queue?.length>0">
+             <p *ngIf="fileuploader?.queue?.length>0"> No. Of Files: {{ fileuploader?.queue?.length }}</p>
             <button class="btn btn-small btn-primary" (click)="fileuploader.uploadAll()" *ngIf="fileuploader?.queue?.length>0">Upload All</button> -->
             <!-- <table class="table">
                 <thead>
@@ -135,12 +151,12 @@
                 </tr>
                 </tbody>
             </table>   
-        </div> 
+        </div> -->
         <div class="col-md-9" *ngIf="!showAddImages">
             <img class="img-fluid" alt="Responsive image" *ngFor="let productImage of product.ProductImages" [(src)]="productImage.path+productImage.md" />
         </div>    
     </div>
-</div> -->
+</div>
 
 <br>
 <div class="row col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
@@ -169,10 +185,10 @@
                     style="padding:5px;border:1px soild #ddd"
                 />
             </div> -->
-            <div class="form-inline form-group">
+            <!-- <div class="form-inline form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label text-right">SKU or Barcode</label>
                 <input type="text" class="form-control col-sm-7" placeholder="SKU or Barcode" [(ngModel)]="newinventory.sku" />
-            </div>
+            </div> -->
             <!-- <div class="form-inline form-group">
                 <label class="col-sm-2 control-label text-right">Size</label>
                 <input auto-complete type="text" class="form-control col-sm-12" placeholder="Size" [(ngModel)]="newinventory.size" [source]= "sizes" no-match-found-text="New Size">
@@ -199,7 +215,7 @@
                 <button type="button" class="btn btn-primary" (click)="updateInventory()" *ngIf="newinventory.productid!=0">Update</button>
             </div> -->
         </div>
-        <div class="col-md-offset-2 col-md-9 col-md-9">
+        <!-- <div class="col-md-offset-2 col-md-9 col-md-9">
             <div class="form-inline form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label text-right">Label</label>
                     <label class="form-control" (click)="newinventory.isfeatured=!newinventory.isfeatured">
@@ -224,7 +240,7 @@
                         <i class="fa fa-check text-success" *ngIf="newinventory.issale">&nbsp;</i> Sale
                     </label>
             </div>                
-        </div>
+        </div> -->
 
         <div class="col-md-offset-2 col-md-9 col-md-9">
             <div class="form-inline form-group"> 
@@ -248,7 +264,7 @@
                 <input type="text" class="form-control col-sm-2" placeholder="Discount" [(ngModel)]="newinventory.discount" />
             </div>            
       </div> 
-      <div class="col-md-offset-2 col-md-9 col-md-9">
+      <!-- <div class="col-md-offset-2 col-md-9 col-md-9">
             <div class="form-inline form-group">
                 <label class="col-sm-2 control-label text-right">Images</label>
                 <input type="file" class="form-control" ng2FileSelect  multiple [uploader]="invfileuploader" accept="image/x-png,image/gif,image/jpeg"/>
@@ -265,21 +281,25 @@
                     
                 </ul>    
             </div>
-        </div>      
+      </div>       -->
       <div class="col-md-offset-2 col-md-9">
-            <div class="form-inline form-group" *ngIf="!invfileuploader.isUploading">
+            <!-- <div class="form-inline form-group" *ngIf="!invfileuploader.isUploading">
+                <label for="inputEmail3" class="col-sm-2 control-label text-right">&nbsp;</label>
+                <button type="button" class="btn btn-primary" (click)="addInventory()" *ngIf="newinventory.productid==0">Save</button>
+                <button type="button" class="btn btn-primary" (click)="updateInventory()" *ngIf="newinventory.productid!=0">Update</button>
+            </div> -->
+            <div class="form-inline form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label text-right">&nbsp;</label>
                 <button type="button" class="btn btn-primary" (click)="addInventory()" *ngIf="newinventory.productid==0">Save</button>
                 <button type="button" class="btn btn-primary" (click)="updateInventory()" *ngIf="newinventory.productid!=0">Update</button>
             </div>
-        
       </div>       
       </div>
       <table class="card-block table table-sm table-hover">
           <thead>
           <tr>
-              <th style="width:1rem">Color</th>
-              <th>SKU</th>
+              <!-- <th style="width:1rem">Color</th> -->
+              <!-- <th>SKU</th> -->
               <th>Size</th>
               <th>Unit Price</th>
               <th>Discount Price</th>
@@ -293,16 +313,16 @@
           </thead>
           <tbody>
           <tr *ngFor="let inventory of product.Inventories; let i = index;">
-              <th scope="row">
-                <!-- <p  [style.backgroundColor]="inventory.color"
+              <!-- <th scope="row">
+                <p  [style.backgroundColor]="inventory.color"
                     [style.color]="inventory.color"
                     style="padding:5px;border:1px soild #ddd"
                 >
                     <i class="fa fa-square">&nbsp;</i>
-              </p> -->
+              </p> 
                 <img *ngIf="inventory.ProductImages.length>0" [(src)]="inventory.ProductImages[0].path+inventory.ProductImages[0].sm" />
-              </th>
-              <td>{{inventory.sku}}</td>
+            </th> -->
+              <!-- <td>{{inventory.sku}}</td> -->
               <td>{{inventory.size}}</td>
               <td>{{inventory.unitprice}}</td>
               <td>{{inventory.discount}}%</td>

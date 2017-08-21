@@ -19,6 +19,11 @@ export class Product {
     public agegroup: string;
     public isnew: boolean;
     public isfeatured: boolean;
+    public isbestseller: boolean;
+    public ishot: boolean;
+    public isdeal: boolean;
+    public issale: boolean;
+    public sku: string;
     public Inventories:Array<Inventory>;
     public ProductImages:Array<ProductImage>;
     public error: Array<Error>;
@@ -37,8 +42,12 @@ export class Product {
         this.longdesc='test long desc';
         this.gender='m';
         this.agegroup='i';
-        this.isnew=true;
-        this.isfeatured=true;
+        this.isfeatured=false;
+        this.isnew=false;
+        this.isbestseller=false;
+        this.ishot=false;
+        this.isdeal=false;
+        this.issale=false;
         this.Inventories = new Array<Inventory>();
         this.error = new Array<Error>();
         this.error=[

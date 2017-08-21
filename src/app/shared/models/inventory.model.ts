@@ -5,13 +5,13 @@ import {Error} from './error.model';
 export class Inventory {
     public id: number;
     public productid: number;
-    public isfeatured: boolean;
-    public isnew: boolean;
-    public isbestseller: boolean;
-    public ishot: boolean;
-    public isdeal: boolean;
-    public issale: boolean;
-    public sku: string;
+    // public isfeatured: boolean;
+    // public isnew: boolean;
+    // public isbestseller: boolean;
+    // public ishot: boolean;
+    // public isdeal: boolean;
+    // public issale: boolean;
+    // public sku: string;
     public instock: number;
     public ordered: number;
     public reserved: number;
@@ -28,7 +28,7 @@ export class Inventory {
         this.id=0;
         this.productid=0;
         this.size='';
-        this.sku='';
+        // this.sku='';
         this.instock=0;
         this.ordered=0;
         this.reserved=0;
@@ -42,12 +42,12 @@ export class Inventory {
             new Error('unitprice','','invalid unit price',false),
             new Error('discount','','invalid discount value',false),
         ];
-        this.isfeatured=false;
-        this.isnew=false;
-        this.isbestseller=false;
-        this.ishot=false;
-        this.isdeal=false;
-        this.issale=false;
+        // this.isfeatured=false;
+        // this.isnew=false;
+        // this.isbestseller=false;
+        // this.ishot=false;
+        // this.isdeal=false;
+        // this.issale=false;
             
     }
 }

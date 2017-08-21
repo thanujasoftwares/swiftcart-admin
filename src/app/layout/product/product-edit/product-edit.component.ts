@@ -65,11 +65,13 @@ export class ProductEditComponent implements OnInit {
     'stretch','reflective','quilted','polyethylene','narrow','laminated','flocked','fire resistant','water resistant','corduroy',
     'velvet','egyptian cotton','knit','memory foam','microfiber','fleece','micro fleece','polyester','stretch','spandex'
     ];
+    this.categories=['Shirts','Tees & Tops', 'Jeans', 'Inner wears'];
+    this.subcategories=['T-Shirts', 'Skits', 'Panties', 'Under wears'];
     this.menuitems = new Array<Menu>();
     menuService.get({vendorid:0})
         .subscribe((menuitems) => {
-          let categories=[];
-          let subcategories=[];
+          let categories=this.categories;
+          let subcategories=this.subcategories;
           menuitems.map((menuitem,index)=>{
             this.menuitems.push({
               id: menuitem.id,
